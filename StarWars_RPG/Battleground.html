@@ -1,0 +1,206 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <!--Float header right  -->
+  <div class="container">
+    <div class="row">
+      <!-- row for header -->
+      <header>Star Wars BattleGround!</header>
+    </div>
+    <div class="row">
+      <h2 class="choosePC"></h2>
+      <!-- row for holding unselected champs divs  -->
+      <!-- also for choosing PC  -->
+      <div id="ashe">
+        <img class="character-pic" src="assets/images/ashe.jpg" alt="Img 404">
+        <div class="hp-ashe">
+
+        </div>
+      </div>
+      <div id="darius">
+        <img class="character-pic" src="assets/images/darius.jpg" alt="Img 404">
+        <div class="hp-darius">
+
+        </div>
+      </div>
+      <div id="galio">
+        <img class="character-pic" src="assets/images/galio.jpg" alt="Img 404">
+        <div class="hp-galio">
+
+        </div>
+      </div>
+      <div id="thresh">
+        <img class="character-pic" src="assets/images/thresh.jpg" alt="Img 404">
+        <div class="hp-thresh">
+
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Your Character</h2>
+    </div>
+    <div class="row PC">
+      <!-- row containing your chosen characters  -->
+
+    </div>
+    <div>
+      <h2>Enemies Available To Attack</h2>
+    </div>
+    <div class="row chooseNPC">
+      <!--row containing characters able to be chosen as opponents  -->
+      <div></div>
+    </div>
+    <div>
+      <h2>Fight Section</h2>
+    </div>
+    <div class="row fightSection">
+      <!-- row holding attack button  -->
+      <button class="attack">ATTACK!</button>
+    </div>
+    <div>
+      <h2>Defender</h2>
+    </div>
+    <div class="row defender">
+      <!-- final row holding defenders declared after choosing one from chooseNPC row -->
+      <div></div>
+      <!-- div holding -->
+    </div>
+  </div>
+</body>
+
+<script>
+
+  var ashe = {
+    id: "ashe",
+    name: "Ashe",
+    attack: 10,
+    attackbase: 5,
+    hp: 100,
+    counterAttack: 100,
+    imageUrl: "assets/images/ashe.jpg"
+  }
+  var darius = {
+    id: "darius",
+    name: "Darius",
+    attack: 100,
+    attackbase: 100,
+    hp: 100,
+    counterAttack: 100,
+    imageUrl: "assets/images/darius.jpg"
+  }
+  var galio = {
+    id: "galio",
+    name: "Galio",
+    attack: 100,
+    attackbase: 100,
+    hp: 100,
+    counterAttack: 100,
+    imageUrl: "assets/images/galio.jpg"
+  }
+  var thresh = {
+    id: "thresh",
+    name: "Thresh",
+    attack: 100,
+    attackbase: 100,
+    hp: 100,
+    counterAttack: 100,
+    imageUrl: "assets/images/thresh.jpg"
+  }
+  var PC;
+  var NPC;
+  var isPCSelected = false;
+  var isNPCSelected = false;
+  var isGameOver = false;
+  var champArray = [ashe, darius, galio, thresh];
+  var enemyArray = [ashe, darius, galio, thresh];
+
+  function LogHP() {
+    $("#hp-ashe").text(ashe.hp);
+    $("#hp-thresh").text(thresh.hp);
+    $("#hp-galio").text(galio.hp);
+    $("#hp-darius").text(darius.hp);
+  }
+  LogHP();
+  function InitiateGame() {
+    //set up for new game
+    $("choosePC").text("Choose Your Champion!");
+    $("div.PC").empty();
+    $("div.chooseNPC").empty();
+    $("div.enemies").empty();
+    $("div.defender").empty();
+  }
+
+  $("#ashe").on("click", function () {    //Choose your champ function
+    if (this == PC) {
+      return;
+    }
+    if (isPCSelected == false && isNPCSelected == false) {
+      PC = ashe;
+
+      console.log()
+    }
+  });
+
+  $("#darius").on("click", function () {    //Choose your champ function
+    if (isPCSelected) {
+      return;
+    }
+    else {
+      PC = darius;
+      myPC = $('#myDiv2').detach();
+      myPC.appendTo('#myDiv2');
+      console.log()
+    }
+  });
+
+  $("#galio").on("click", function () {    //Choose your champ function
+    if (isPCSelected) {
+      return;
+    }
+    else {
+      PC = galio;
+      myPC = $('#myDiv2').detach();
+      myPC.appendTo('#myDiv2');
+      console.log()
+    }
+  });
+
+  $("#thresh").on("click", function () {    //Choose your champ function
+    if (isPCSelected) {
+      return;
+    }
+    else {
+      PC = thresh;
+      myPC = $('#myDiv2').detach();
+      myPC.appendTo('#myDiv2');
+      console.log()
+    }
+  });
+
+
+  $(".attack").on("click", function () { //attack function
+    if (isPCSelected == false || isNPCSelected == false) { // if PC or NPC false return out
+      return false;
+    }
+    NPC.hp = NPC.hp - PC.attack;
+    PC.attack = PC.attack + PC.attackbase;
+    if (NPC.hp <= 0) {
+      //set id="NPC" tp id="dead"
+      isNPCSelected = false;
+      return;
+    }
+    PC.health = PC.health - NPC.counterAttack;
+  });
+
+</script>
+
+</html>
